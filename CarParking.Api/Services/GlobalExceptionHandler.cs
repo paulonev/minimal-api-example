@@ -13,6 +13,7 @@ public class GlobalExceptionHandler : IExceptionHandler
         int status = exception switch
         {
             ArgumentException => StatusCodes.Status400BadRequest,
+            BadHttpRequestException => StatusCodes.Status400BadRequest,
             _ => StatusCodes.Status500InternalServerError
         };
         httpContext.Response.StatusCode = status;

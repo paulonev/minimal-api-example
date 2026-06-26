@@ -8,6 +8,7 @@ using CarParking.Api.Tests.TestInfrastructure;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
+using System.Text.Json;
 
 namespace CarParking.Api.Tests.Endpoints;
 
@@ -45,6 +46,20 @@ public class ParkingEndpointsTests
 
         Assert.Equal(StatusCodes.Status400BadRequest, executed.StatusCode);
         Assert.Contains(nameof(ParkVehicleRequest.VehicleReg), payload.Errors.Keys);
+    }
+
+    [Fact]
+    public void ParkVehicleRequest_ShouldDeserializeInvalidVehicleTypeAsDefaultValue()
+    {
+        var request = JsonSerializer.Deserialize<ParkVehicleRequest>(
+            """{"vehicleReg":"ABC123","vehicleType":"Truck"}""")!;
+
+        var validator = new CarParking.Api.Validators.ParkVehicleRequestValidator();
+        var validationResult = validator.Validate(request);
+
+        Assert.Equal(default, request.VehicleType);
+        Assert.False(validationResult.IsValid);
+        Assert.Contains(validationResult.Errors, error => error.PropertyName == nameof(ParkVehicleRequest.VehicleType));
     }
 
     [Fact]

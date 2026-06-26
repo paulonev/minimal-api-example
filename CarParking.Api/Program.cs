@@ -69,6 +69,7 @@ if (app.Environment.IsDevelopment() || enableSwagger)
     });
 }
 
+app.UseExceptionHandler();
 app.UseHttpsRedirection();
 
 app.MapParkingEndpoints();
