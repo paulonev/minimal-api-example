@@ -1,0 +1,44 @@
+## User-specific files
+.vs/
+.vscode/
+*.user
+*.rsuser
+*.suo
+*.userosscache
+*.sln.docstates
+
+## Build results
+bin/
+obj/
+out/
+
+## ASP.NET Core / .NET
+*.userprefs
+*.csproj.user
+*.dbmdl
+*.jfm
+*.pgdata
+*.cache
+TestResults/
+coverage/
+coverage.cobertura.xml
+
+## Visual Studio / Rider
+_ReSharper.Caches/
+.idea/
+
+## NuGet
+*.nupkg
+*.snupkg
+**/packages/
+
+## Logs
+*.log
+
+## Local config / secrets
+appsettings.Local.json
+secrets.json
+
+## OS files
+.DS_Store
+Thumbs.db
